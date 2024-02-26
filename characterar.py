@@ -4,6 +4,7 @@ import pygame.mouse
 import os
 import random
 import thorpy
+import glob
 
 pygame.init()
 pygame.camera.init()
@@ -13,11 +14,11 @@ webcam = pygame.camera.Camera(webcams[int(input("Enter camera number: "))])
 print(f"Using camera {webcam}")
 webcam.start()
 
-characters = os.listdir("characters")
+characters = glob.glob(os.path.join("characters", "*"))
 print(characters)
 character = 0
-idle = pygame.image.load(os.path.join("characters", characters[character], "idle.png"))
-right = pygame.image.load(os.path.join("characters", characters[character], "right.png"))
+idle = pygame.image.load(os.path.join(characters[character], "idle.png"))
+right = pygame.image.load(os.path.join(characters[character], "right.png"))
 left = pygame.transform.flip(right, True, False)
 
 def switch_character():
@@ -28,8 +29,8 @@ def switch_character():
     character += 1
     if character == len(characters):
         character = 0
-    idle = pygame.image.load(os.path.join("characters", characters[character], "idle.png"))
-    right = pygame.image.load(os.path.join("characters", characters[character], "right.png"))
+    idle = pygame.image.load(os.path.join(characters[character], "idle.png"))
+    right = pygame.image.load(os.path.join(characters[character], "right.png"))
     left = pygame.transform.flip(right, True, False)
     idle = pygame.transform.scale(idle, (CAMERA_WIDTH / 10, CAMERA_WIDTH / 10))
     right = pygame.transform.scale(right, (CAMERA_WIDTH / 10, CAMERA_WIDTH / 10))
