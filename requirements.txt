@@ -1,5 +1,5 @@
 pygame
 numpy
 opencv-python
-thorpy
+questionary
 pillow
